@@ -214,6 +214,7 @@ class RegenerateCategoryRewrites extends AbstractRegenerateRewrites
             $category->getResource()->saveAttribute($category, 'url_key');
         }
 
+        $category->setUrlPath(null);
         $category->setUrlPath($this->_getCategoryUrlPathGenerator()->getUrlPath($category));
         $category->getResource()->saveAttribute($category, 'url_path');
 
@@ -251,6 +252,7 @@ class RegenerateCategoryRewrites extends AbstractRegenerateRewrites
     {
         $categoriesCollection = $this->categoryCollectionFactory->create();
         $categoriesCollection->addAttributeToSelect('name')
+            ->setStoreId($storeId)
             ->addAttributeToSelect('url_key')
             ->addAttributeToSelect('url_path')
             // if we need to regenerate Url Rewrites for all categories then we select only top level
